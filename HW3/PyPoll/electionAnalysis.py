@@ -10,6 +10,7 @@ csvpath = r'Resources\election_data.csv'
 electionCSV = csvpath
 dataSet = collections.defaultdict(list) 
 #dataSet = {string:list}
+
 # Path to collect data from the Resources folder
 
 keyWords = ['Candidate']
@@ -19,17 +20,11 @@ with open(electionCSV, 'r') as csvfile:
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)
-    if keyWords[0] in header:
-        index = header.index(keyWords[0])
-    else:
-        print("Cant find the proper candidate")
-        exit(-1)
-    
     
     #assumption of knowing the dataSet already
     #will be problematic if we do not know the real index
     for row in csvreader:
-        candidate = row[index]
+        candidate = row[2]
         county = row[1] 
         voterID = row[0]
         dataSet[candidate].append(((voterID), county))
@@ -40,7 +35,6 @@ with open(electionCSV, 'r') as csvfile:
         #eachCandidateVotes = (count( [ votes[0] for votes in candidateVoteDetails]))
         candidatesTotalVotes[candidate] = eachCandidateVotes
     print(candidatesTotalVotes)
-
 
 
     #print(dataSet)
