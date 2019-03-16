@@ -55,9 +55,9 @@ electionWinner = candidateWinningVotes.index(max(candidateWinningVotes))
 #print(electionWinner)
 for each in candidateVotesOutput:
 	percentage = '{:.2%}'.format(each[1])
-	print(f"{each[0]}: {percentage} {each[2]}") 
+	print(f"{each[0]}: {percentage} ({each[2]})") 
 print(f"-------------------------")
-print(f" Winner: {cVO[electionWinner][0]}")
+print(f"Winner: {cVO[electionWinner][0]}")
 print(f"-------------------------")
 
 
