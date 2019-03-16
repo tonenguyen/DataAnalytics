@@ -1,5 +1,6 @@
 #Author: Toan D Nguyen
 #HW3 part B
+#
 
 import os
 import csv
@@ -32,10 +33,21 @@ with open(electionCSV, 'r') as csvfile:
     candidatesTotalVotes = dict()
     for candidate in dataSet.keys():
         eachCandidateVotes = len(list(dataSet[candidate]))
-        #eachCandidateVotes = (count( [ votes[0] for votes in candidateVoteDetails]))
         candidatesTotalVotes[candidate] = eachCandidateVotes
-    print(candidatesTotalVotes)
+    print(candidatesTotalVotes.values())
 
+electionTotalVotes  = sum(list(candidatesTotalVotes.values()))
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: {electionTotalVotes}")
+print(f"-------------------------")
+candidateVotesOutput = [(candidate, candidatesTotalVotes[candidate]/electionTotalVotes, candidatesTotalVotes[candidate] ) for candidate in candidatesTotalVotes.keys()]
+print(candidateVotesOutput)
+electionWinner = max([candidateinfo[2] for candidateinfo in candidateVotesOutput])
+print(electionWinner)
+#[print(" {candidate}: {:.2%}.format(candidateVotes) (candidatesTotalVotes[eachCandidate])
+#  -------------------------
+# Winner: Khan
+#  -------------------------
+#  -------------------------
 
-    #print(dataSet)
-    
