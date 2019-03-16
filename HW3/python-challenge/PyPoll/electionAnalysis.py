@@ -24,6 +24,9 @@ with open(electionCSV, 'r') as csvfile:
     
     #assumption of knowing the dataSet already
     #will be problematic if we do not know the real index
+	#A default dict with key being candidate and a list of  tuple 
+	#of each voter(voterID, county) who voted for that candidate
+	
     for row in csvreader:
         candidate = row[2]
         county = row[1] 
@@ -31,23 +34,30 @@ with open(electionCSV, 'r') as csvfile:
         dataSet[candidate].append(((voterID), county))
 
     candidatesTotalVotes = dict()
+	
     for candidate in dataSet.keys():
         eachCandidateVotes = len(list(dataSet[candidate]))
         candidatesTotalVotes[candidate] = eachCandidateVotes
     print(candidatesTotalVotes.values())
 
+# get the total votes of the election
 electionTotalVotes  = sum(list(candidatesTotalVotes.values()))
-print("Election Results")
+
+print("\nElection Results")
 print("-------------------------")
 print(f"Total Votes: {electionTotalVotes}")
 print(f"-------------------------")
-candidateVotesOutput = [(candidate, candidatesTotalVotes[candidate]/electionTotalVotes, candidatesTotalVotes[candidate] ) for candidate in candidatesTotalVotes.keys()]
-print(candidateVotesOutput)
-electionWinner = max([candidateinfo[2] for candidateinfo in candidateVotesOutput])
-print(electionWinner)
-#[print(" {candidate}: {:.2%}.format(candidateVotes) (candidatesTotalVotes[eachCandidate])
-#  -------------------------
-# Winner: Khan
-#  -------------------------
-#  -------------------------
+#create a tuple of  eachcandidate, % percentage vote, total Vote for that candidate
+candidateVotesOutput = cVO = [(candidate, candidatesTotalVotes[candidate]/electionTotalVotes, candidatesTotalVotes[candidate] ) for candidate in candidatesTotalVotes.keys()]
+#print(candidateVotesOutput)
+candidateWinningVotes = [candidateinfo[2] for candidateinfo in candidateVotesOutput]
+electionWinner = candidateWinningVotes.index(max(candidateWinningVotes))
+#print(electionWinner)
+for each in candidateVotesOutput:
+	percentage = '{:.2%}'.format(each[1])
+	print(f"{each[0]}: {percentage} {each[2]}") 
+print(f"-------------------------")
+print(f" Winner: {cVO[electionWinner][0]}")
+print(f"-------------------------")
+
 
