@@ -1,5 +1,6 @@
-#Author: Toan D Nguyen
-#HW3 part A
+# Author: Toan D Nguyen
+# HW3 part A
+# Calculate all the transactions 
 
 import os
 import csv
@@ -31,9 +32,11 @@ diffAverage = sum(diffDataSet)/len(diffDataSet)
 #print(diffAverage)
 numTransactions = len(dataSet)
 totalAverage = totalAmount/numTransactions
+
 print(" Financial Analysis ")
 print(" ---------------------------- " )
 print(f" Total months {numTransactions} \n Total: ${totalAmount} \n Avg Change: {diffAverage:.2f} ")
+
 # find the key greatIn/Decrease through determining index of min/max values from dataSet.values()
 greatDecreaseKey = list(dataSet.keys())[transacts.index(min(transacts))]
 greatIncreaseKey = list(dataSet.keys())[transacts.index(max(transacts))]
