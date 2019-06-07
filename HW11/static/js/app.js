@@ -14,6 +14,8 @@ submit.on("click", function() {
   
     // Get the value property of the input element
     var inputValue = inputElement.property("value");
+	
+	d3.select("#datetime").node().value = "";
     console.log("Hello")
     //console.log(inputElement);  
     console.log(inputValue);
@@ -47,6 +49,8 @@ submit.on("click", function() {
 function buildTable(filterData) {
     var data = filterData
     var table = d3.select("#ufo-table");
+    // remove elements
+    d3.select("tbody").selectAll("tr").remove();
     var tbody = table.select("tbody");
     var trow;
     var len = Object.keys(data).length;
