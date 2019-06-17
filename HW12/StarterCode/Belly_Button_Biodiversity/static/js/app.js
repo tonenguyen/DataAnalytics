@@ -1,5 +1,22 @@
 function buildMetadata(sample) {
 
+  
+    d3.json(`/metadata/${sample}`).then((data) => {
+    console.log(data);
+
+    var PANEL = d3.select("#sample-metadata");
+
+    // Use `.html("") to clear any existing metadata
+    PANEL.html("");
+
+    Object.entries(data).forEach(([key, value]) => {
+      PANEL.append("h5").text(`${key}: ${value}`);
+    });
+
+  }); //end of metadata
+
+  
+  
   // @TODO: Complete the following function that builds the metadata panel
 
   // Use `d3.json` to fetch the metadata for a sample
@@ -19,6 +36,67 @@ function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
 
+  d3.json(`/samples/${sample}`).then((data) => {
+    console.log(data);
+    // not the best practices
+    var topTenData = data.sample_values.map(function(a, b) {
+      return {index: b, value: a}; });
+    
+    //descending orders
+    topTenData.sort((a, b) => b.value - a.value)  ;
+
+    topTenData = Object.entries(topTenData).slice(0,10).map(entry => entry[1]);
+    console.log(topTenData);
+
+    var pieData ={
+        values: [] ,
+        labels: [],
+        hovertext:[],
+        hoverinfo: "hovertext",
+        type: "pie"
+      };
+
+    var pieLayout = {
+      margin: { t: 0, l: 0 }
+    };
+    
+
+
+    Object.entries(topTenData).forEach(function([index, value]) {
+      var key =value.index;
+      pieData.values.push(data.sample_values[key]);
+      pieData.labels.push(data.otu_ids[key]);
+      pieData.hovertext.push(data.otu_labels[key]);
+      //pieData.text.push()
+    });
+console.log(pieData);
+pieData = [pieData]
+Plotly.plot("pie", pieData, pieLayout);
+
+
+
+var bubbleLayout = {
+  margin: { t: 0 },
+  hovermode: "closest",
+  xaxis: { title: "otu ids" }
+};
+var bubbleData = [
+  {
+    x: data.otu_ids,
+    y: data.sample_values,
+    text: data.otu_labels,
+    mode: "markers",
+    marker: {
+      size: data.sample_values,
+      color: data.otu_ids,
+      colorscale: "Sky"
+    }
+  }
+];
+
+Plotly.plot("bubble", bubbleData, bubbleLayout);
+
+});
     // @TODO: Build a Bubble Chart using the sample data
 
     // @TODO: Build a Pie Chart
@@ -29,7 +107,7 @@ function buildCharts(sample) {
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
-
+  // populate drop down box
   // Use the list of sample names to populate the select options
   d3.json("/names").then((sampleNames) => {
     sampleNames.forEach((sample) => {
