@@ -13,7 +13,7 @@
 
     <nav class="navbar">
 		<ul class="nav navbar-nav navbar-left">
-			  <li class="left"><a href="#">Latitude</a> </li>
+			  <li class="left"><a href="index.html">Latitude</a> </li>
 		</ul>	
 		<ul class="nav navbar-nav navbar-right">
 			  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Plots <span class="caret"></span></a>
@@ -29,20 +29,31 @@
 	</nav>
 	 
 	 
-	 <div class="container">
-      <section class="row">
-        <div class="col-md-6">
-          <article class="description-content">
-            <h1 class="description-header">Summary: Latitude vs. X</h1>
-            <hr class="description-hr"/>
- 			<img src="assets/images/Fig1.png" alt="" id="description-image"/>
-          </article>
-        </div>
+    <br />
+         <div id="table-area" class="">
+            <table id="cities-table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="table-head">City_ID</th>
+                  <th class="table-head">City</th>
+                  <th class="table-head">Country</th>
+                  <th class="table-head">Date</th>
+                  <th class="table-head">Max Temp</th>
+                  <th class="table-head">Humidity</th>
+				  <th class="table-head">Cloudiness</th>
+				  <th class="table-head">WindSpeed</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
   
       </section>
     </div>
   
- 
+
+
 
 
 
@@ -50,5 +61,13 @@
 
     <!-- Bootstrap CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
+	 <script src="assets/data.js"</script>
+	 <script src="assets/app.js" </script>
+	 
+
+   
   </body>
 </html>
